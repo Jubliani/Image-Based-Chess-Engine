@@ -84,20 +84,31 @@ class GameParser:
                                     colors={"square light": "#FFFFFF", "square dark": "#555555"})
 
             fen = board.fen().replace("/", "_")
-            with open(f'images\{evaluation}\output.svg', 'w') as output:
+            with open(f'chessEngine\images\{evaluation}\output.svg', 'w') as output:
                 output.write(image)
-            drawing = svg2rlg(f'images\{evaluation}\output.svg')
-            renderPM.drawToFile(drawing, f"images\{evaluation}\{fen}.png", fmt="PNG")
+            drawing = svg2rlg(f'chessEngine\images\{evaluation}\output.svg')
+            renderPM.drawToFile(drawing, f"chessEngine\images\{evaluation}\{fen}.png", fmt="PNG")
             counter -= 1
-        os.remove('images\good\output.svg')
-        os.remove('images\\neutral\output.svg')
-        os.remove('images\\bad\output.svg')
+        os.remove('chessEngine\images\good\output.svg')
+        os.remove('chessEngine\images\\neutral\output.svg')
+        os.remove('chessEngine\images\\bad\output.svg')
 
     def getEval(self, move: chess.pgn.GameNode):
         evaluation = move.eval()
         if evaluation is None:
             return False
         return self.evalToLabel(str(evaluation.white()))
+    
+    def FENtoPNG(self, fen):
+        board = chess.Board(fen=fen)
+        image = chess.svg.board(board, coordinates=False, size=100,
+                                    colors={"square light": "#FFFFFF", "square dark": "#555555"})
+        fen = board.fen().replace("/", "_")
+        with open('chessEngine\images\\test\output.svg', 'w') as output:
+            output.write(image)
+        drawing = svg2rlg('chessEngine\images\\test\output.svg')
+        renderPM.drawToFile(drawing, f"chessEngine\images\\test\{fen}.png", fmt="PNG")
+
 
     # print(sum(1 for line in open('games\lichess_db_standard_rated_2022-09Modified.pgn')))
     # print(sum(1 for line in open('games\lichess_db_standard_rated_2022-09.pgn')))
