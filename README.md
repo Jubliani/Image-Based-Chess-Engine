@@ -14,8 +14,8 @@ Why did I do this? In the wise words of Cave Johnson:<br>
 
  **Neural networks**<br>
  
- <img src="./chessEngine/results/EfficientNetB0_B32_E5_Lr1e-4_Wd0.png" width="500">  <img src="./chessEngine/results/EfficientNetB0_B64_E5_Lr1e-4_Wd0.png" width="500"><br>
- <img src="./chessEngine/results/EfficientNetB0_B32_E50_Lr1e-4_Wd0.png" width="500">  <img src="./chessEngine/results/EfficientNetB0_B32_E20_Lr1e-4_Wd1e-4.png" width="500"><br>
+ <img src="./chessEngine/results/EfficientNetB0_B32_E5_Lr1e-3_Wd0.png" width="500">  <img src="./chessEngine/results/EfficientNetB0_B64_E5_Lr1e-3_Wd0.png" width="500"><br>
+ <img src="./chessEngine/results/EfficientNetB0_B32_E50_Lr1e-3_Wd0.png" width="500">  <img src="./chessEngine/results/EfficientNetB0_B32_E20_Lr1e-3_Wd1e-4.png" width="500"><br>
 
 
  ***TODO:*** try using an SVM instead?
