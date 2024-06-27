@@ -8,9 +8,10 @@ Why did I do this? In the wise words of Cave Johnson:<br>
 <b><p style="font-style: italic;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Science isn't about WHY. It's about WHY NOT."
 </p></b>
- # Testing the models
+
+# Testing the models
  To try out a model, simply run the chessEngine/modelInteractive.py file and follow the prompts
- # Results so far
+# Results so far
  Here are plots of the models I've trained. The goal of the project was just to see if this even slightly works, so decisions regarding hyperparameters and types of models were somehwat arbitrary (you can view these images in the chessEngine/results folder).<br>
 
  **Neural networks**<br>
