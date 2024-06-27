@@ -1,16 +1,17 @@
 import torch
 import torch.nn as nn
-import torch.optim as optim
+from torchvision.datasets import ImageFolder
+import torchvision.transforms as transforms
 from torch.utils.data import Dataset, DataLoader
 import torchvision
-import torchvision.transforms as transforms
-from torchvision.datasets import ImageFolder
+import chess
+import chess.pgn
+import chess.svg
+from reportlab.graphics import renderPM
+from svglib.svglib import svg2rlg
+import os
+from PIL import Image
 import timm
-
-import matplotlib.pyplot as plt # For data viz
-import numpy as np
-import sys
-from tqdm.notebook import tqdm
 
 class PositionDataset(Dataset):
     def __init__(self, data_dir, transform=None):
@@ -38,3 +39,44 @@ class PositionClassifier(nn.Module):
         x = self.features(x)
         output = self.classifier(x)
         return output
+
+class InteractiveModel():
+
+    def __init__(self, modelChoice):
+        modelPath = f"chessEngine\models\{modelChoice}"
+        self.model = PositionClassifier()
+        self.model.load_state_dict(torch.load(modelPath))
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.model.to(self.device)
+        self.model.eval()
+        self.previousFEN = ""
+        self.outputs = ['Bad', 'Good', 'Neutral']
+
+    def FENtoPNG(self, fen):
+            board = chess.Board(fen=fen)
+            image = chess.svg.board(board, coordinates=False, size=100,
+                                        colors={"square light": "#FFFFFF", "square dark": "#555555"})
+            fen = board.fen().replace("/", "_")
+            with open('chessEngine\interactiveImage\output.svg', 'w') as output:
+                output.write(image)
+            drawing = svg2rlg('chessEngine\interactiveImage\output.svg')
+            renderPM.drawToFile(drawing, f"chessEngine\interactiveImage\{fen}.png", fmt="PNG")
+            os.remove('chessEngine\interactiveImage\output.svg')
+            self.previousFEN = fen
+    
+    def EvaluateFEN(self, fen):
+        self.FENtoPNG(fen)
+        transform = transforms.Compose([
+            transforms.ToTensor(),
+            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+            transforms.Grayscale(1)
+        ])
+        image = transform(Image.open(f'chessEngine\interactiveImage\{self.previousFEN}.png')).unsqueeze(0)
+        with torch.no_grad():
+            image_tensor = image.to(self.device)
+            outputs = self.model(image_tensor)
+        self.deleteLastImage()
+        return f"Evaluation: {self.outputs[torch.argmax(outputs)]}"
+
+    def deleteLastImage(self):
+        os.remove(f'chessEngine\interactiveImage\{self.previousFEN}.png')

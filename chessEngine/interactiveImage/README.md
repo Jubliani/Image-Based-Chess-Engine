@@ -1,0 +1,1 @@
+Do NOT delete this directory or modify it. This is where the program generates an image for the model to evaluate during user interaction
