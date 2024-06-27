@@ -10,8 +10,9 @@ Why did I do this? In the wise words of Cave Johnson:<br>
 </p></b>
 
 # Testing the models
- To try out a model, simply run the chessEngine/modelInteractive.py file and follow the prompts
- ***!!!IMPORTANT!!!*** This project was built on Windows 10 using Python 3.10.14 since there's at least one package in here that is fine up to Python 3.10, so I'm not sure if the dependencies all work out for other platforms. 
+ ***!!!IMPORTANT!!!*** This project was built on Windows 10 using Python 3.10.14 since there's at least one package in here that is fine up to Python 3.10, so I'm not sure if the dependencies all work out for other platforms. <br>
+ 
+ To try out a model, simply run the chessEngine/modelInteractive.py file and follow the prompts.
 # Results so far
  Here are plots of the models I've trained. The goal of the project was just to see if this even slightly works, so decisions regarding hyperparameters and types of models were somehwat arbitrary (you can view these images in the chessEngine/results folder).<br>
 
