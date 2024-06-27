@@ -9,13 +9,17 @@ Why did I do this? In the wise words of Cave Johnson:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Science isn't about WHY. It's about WHY NOT."
 </p></b>
 
- # Results so far
+# Testing the models
+ To try out a model, simply run the chessEngine/modelInteractive.py file and follow the prompts
+ ***!!!IMPORTANT!!!*** This project was built on Windows 10 using Python 3.10.14 since there's at least one package in here that is fine up to Python 3.10, so I'm not sure if the dependencies all work out for other platforms. 
+# Results so far
  Here are plots of the models I've trained. The goal of the project was just to see if this even slightly works, so decisions regarding hyperparameters and types of models were somehwat arbitrary (you can view these images in the chessEngine/results folder).<br>
 
  **Neural networks**<br>
  
  <img src="./chessEngine/results/EfficientNetB0_B32_E5_Lr1e-3_Wd0.png" width="500">  <img src="./chessEngine/results/EfficientNetB0_B64_E5_Lr1e-3_Wd0.png" width="500"><br>
  <img src="./chessEngine/results/EfficientNetB0_B32_E50_Lr1e-3_Wd0.png" width="500">  <img src="./chessEngine/results/EfficientNetB0_B32_E20_Lr1e-3_Wd1e-4.png" width="500"><br>
+ <img src="./chessEngine/results/EfficientNetB0_B32_E15_Lr1e-3_Wd1e-3.png" width="500">
 
 
  ***TODO:*** try using an SVM instead?
