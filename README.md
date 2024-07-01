@@ -29,3 +29,4 @@ Why did I do this? In the wise words of Cave Johnson:<br>
  **SVMs**<br>
  These first set of results are using 5000 randomly shuffled images from the dataset on different SVCs (sklearn)
   <img src="./chessEngine/results/SVM/GridSearch5000.png" width="1000">
+ I then decided to train/test an svc using c=1000 and gamma=0.01 on 20000 images and got an accuracy of 0.60575
