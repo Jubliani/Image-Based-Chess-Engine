@@ -12,6 +12,14 @@ from svglib.svglib import svg2rlg
 import os
 from PIL import Image
 import timm
+import numpy as np
+from tqdm.notebook import tqdm
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GridSearchCV
+from sklearn.svm import SVC, LinearSVC
+from sklearn.preprocessing import Normalizer
+from sklearn.metrics import accuracy_score
+import pickle
 
 class PositionDataset(Dataset):
     def __init__(self, data_dir, transform=None):
@@ -42,16 +50,10 @@ class PositionClassifier(nn.Module):
 
 class InteractiveModel():
 
-    def __init__(self, modelChoice):
-        modelPath = f"chessEngine\models\{modelChoice}"
-        self.model = PositionClassifier()
-        self.model.load_state_dict(torch.load(modelPath))
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model.to(self.device)
-        self.model.eval()
+    def __init__(self):
         self.previousFEN = ""
         self.outputs = ['Bad', 'Good', 'Neutral']
-
+    
     def FENtoPNG(self, fen):
             board = chess.Board(fen=fen)
             image = chess.svg.board(board, coordinates=False, size=100,
@@ -63,6 +65,24 @@ class InteractiveModel():
             renderPM.drawToFile(drawing, f"chessEngine\interactiveImage\{fen}.png", fmt="PNG")
             os.remove('chessEngine\interactiveImage\output.svg')
             self.previousFEN = fen
+    
+    def deleteLastImage(self):
+        os.remove(f'chessEngine\interactiveImage\{self.previousFEN}.png')
+    
+    def EvaluateFEN(self, fen):
+        pass
+    
+class InteractiveModelNN(InteractiveModel):
+
+    def __init__(self, modelChoice):
+        super().__init__()
+        modelPath = f"chessEngine\models\\NN\{modelChoice}"
+        self.model = PositionClassifier()
+        self.model.load_state_dict(torch.load(modelPath))
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        print(f'Running on device: {self.device}')
+        self.model.to(self.device)
+        self.model.eval()
     
     def EvaluateFEN(self, fen):
         self.FENtoPNG(fen)
@@ -77,6 +97,25 @@ class InteractiveModel():
             outputs = self.model(image_tensor)
         self.deleteLastImage()
         return f"Evaluation: {self.outputs[torch.argmax(outputs)]}"
+    
+class InteractiveModelSVM(InteractiveModel):
 
-    def deleteLastImage(self):
-        os.remove(f'chessEngine\interactiveImage\{self.previousFEN}.png')
+    def __init__(self, modelChoice):
+        super().__init__()
+        modelPath = f"chessEngine\models\\SVM\{modelChoice}"
+        with open(modelPath, 'rb') as f:
+            self.model = pickle.load(f)
+    
+    def EvaluateFEN(self, fen):
+        self.FENtoPNG(fen)
+        image = Normalizer(copy=False).fit_transform([np.asarray(Image.open(f'chessEngine\interactiveImage\{self.previousFEN}.png').convert('L')).flatten()])
+        self.deleteLastImage()
+        return f"Evaluation: {self.outputs[(self.model.predict(image))[0]]}"
+
+def ChooseModel(modelType, modelChoice):
+    if modelType == 'NN':
+        return InteractiveModelNN(modelChoice)
+    elif modelType == 'SVM':
+        return InteractiveModelSVM(modelChoice)
+    else:
+        return 0
