@@ -21,14 +21,17 @@ Why did I do this? In the wise words of Cave Johnson:<br>
 
  **Neural networks**<br>
  
- <img src="./chessEngine/results/NN/EfficientNetB0_B32_E5_Lr1e-3_Wd0.png" width="500">  <img src="./chessEngine/results/NN/EfficientNetB0_B64_E5_Lr1e-3_Wd0.png" width="500"><br>
- <img src="./chessEngine/results/NN/EfficientNetB0_B32_E50_Lr1e-3_Wd0.png" width="500">  <img src="./chessEngine/results/NN/EfficientNetB0_B32_E20_Lr1e-3_Wd1e-4.png" width="500"><br>
+ <img src="./chessEngine/results/NN/EfficientNetB0_B32_E5_Lr1e-3_Wd0.png" width="500"><br>  
+ <img src="./chessEngine/results/NN/EfficientNetB0_B64_E5_Lr1e-3_Wd0.png" width="500"><br>
+ <img src="./chessEngine/results/NN/EfficientNetB0_B32_E50_Lr1e-3_Wd0.png" width="500"><br>
+ ***Note:*** the above 3 images represent models trained on all 3 color channels by mistake. All other models are trained on greyscale images so the above 3 aren't available for use. <br>
+ <img src="./chessEngine/results/NN/EfficientNetB0_B32_E20_Lr1e-3_Wd1e-4.png" width="500"><br>
  <img src="./chessEngine/results/NN/EfficientNetB0_B32_E15_Lr1e-3_Wd1e-3.png" width="500">
 
 
  **SVMs**<br>
  These first set of results are using 5000 randomly shuffled images from the dataset on different SVCs (sklearn)
-  <img src="./chessEngine/results/SVM/GridSearch5000.png" width="1000">
+  <img src="./chessEngine/results/SVM/GridSearch5000.png" width="1000"> <br>
  I then decided to train/test an svc using c=1000 and gamma=0.01 on 20000 images and got an accuracy of 0.60575 <br>
  Next I tried using a LinearSVC due to its better runtime and from here on out I'll be using a lot more images.
  First was training/testing a LinearSVC using the default parameters on 20000 images. This got an accuracy of 0.59275. <br>
