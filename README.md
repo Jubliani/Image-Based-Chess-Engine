@@ -29,4 +29,7 @@ Why did I do this? In the wise words of Cave Johnson:<br>
  **SVMs**<br>
  These first set of results are using 5000 randomly shuffled images from the dataset on different SVCs (sklearn)
   <img src="./chessEngine/results/SVM/GridSearch5000.png" width="1000">
- I then decided to train/test an svc using c=1000 and gamma=0.01 on 20000 images and got an accuracy of 0.60575
+ I then decided to train/test an svc using c=1000 and gamma=0.01 on 20000 images and got an accuracy of 0.60575 <br>
+ Next I tried using a LinearSVC due to its better runtime and from here on out I'll be using a lot more images.
+ First was training/testing a LinearSVC using the default parameters on 20000 images. This got an accuracy of 0.59275. <br>
+ I then tried another model (with 20k images) with C=1000, which got an accuracy of 0.68425.
