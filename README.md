@@ -9,6 +9,9 @@ Why did I do this? In the wise words of Cave Johnson:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Science isn't about WHY. It's about WHY NOT."
 </p></b>
 
+## How it works
+ You feed in a FEN to the interface which the program uses to generate an image representing the board state. The image is then fed into the model of your choice for evaluation.
+
 ## Testing the models
  ***!!!IMPORTANT!!!*** This project was built on Windows 10 using Python 3.10.14 since there's at least one package in here that is fine up to Python 3.10, so I'm not sure if the dependencies all work out for other platforms. <br>
  Additionally, this project uses the svglib package. I had to install svglib 1.0.1 to get the conversion process between SVG and PNG files working, so that could be a potential fix if it's not working for you. <br>
