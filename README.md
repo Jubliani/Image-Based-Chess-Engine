@@ -3,7 +3,7 @@
  
  So far, the engine will only consider if the position is "good", "bad" or "neutral" from white's perspective, assuming it is white to play. Training images were sourced from the Lichess open data base for July 2022. For the sake of training, a "good" and "bad" position were those evaluated to be at least 1.5 in white/black's favor in the database (and hence "neutral" being inbetween).<br>
 
-Why did I do this when there's far better ways to create a chess engine? In the wise words of Cave Johnson:<br>
+Why did I do this when there are far better ways to create a chess engine? In the wise words of Cave Johnson:<br>
 
 <b><p style="font-style: italic;">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Science isn't about WHY. It's about WHY NOT."
