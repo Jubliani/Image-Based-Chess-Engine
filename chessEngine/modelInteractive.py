@@ -7,7 +7,7 @@ modelTypes = []
 models = []
 print(os.getcwd())
 print("List of models:")
-modelFolder = os.listdir('chessEngine\models')
+modelFolder = os.listdir('models')
 for i in range(len(modelFolder)):
     modelTypes.append(modelFolder[i])
     print(f"    {i}: {modelFolder[i]}")
@@ -23,7 +23,7 @@ while True:
         print("Error: folder doesn't exist")
         continue
 modelType = modelTypes[modelChoice]
-modelFolder = os.listdir(f'chessEngine\models\{modelType}')
+modelFolder = os.listdir(os.path.join(os.getcwd(), 'models', modelType))
 for i in range(len(modelFolder)):
     models.append(modelFolder[i])
     print(f"    {i}: {modelFolder[i]}")
